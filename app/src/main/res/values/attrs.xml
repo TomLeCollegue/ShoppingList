@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="progressStrokeWidth" format="dimension"/>
+    <attr name="progressTextColor" format="color"/>
+
+    <declare-styleable name="CircleProgressView">
+        <attr name="progressStrokeWidth"/>
+        <attr name="unselectedColor" format="color"/>
+        <attr name="selectedColor" format="color"/>
+        <attr name="actionText" format="string"/>
+        <attr name="actionTextSize" format="dimension"/>
+        <attr name="progressTextSize" format="dimension"/>
+        <attr name="progressTextColor"/>
+        <attr name="colorAnimDuration" format="integer"/>
+        <attr name="progressAnimDuration" format="integer"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="ProgressCustom">
+        <attr name="fan_color1" format="color"/>
+        <attr name="colorProgress" format="color"/>
+        <attr name="colorBackground" format="color"/>
+
+    </declare-styleable>
+</resources>
