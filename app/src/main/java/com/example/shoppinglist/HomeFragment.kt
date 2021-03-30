@@ -10,9 +10,11 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppinglist.adapters.ProductAdapter
+import com.example.shoppinglist.storage.Product
 
 class HomeFragment : Fragment() {
 
@@ -32,7 +34,8 @@ class HomeFragment : Fragment() {
         val addButtonText = view.findViewById<TextView>(R.id.buttonAddText)
 
         val recyclerViewProduct = view.findViewById<RecyclerView>(R.id.recyclerViewProduct)
-        val adapter = ProductAdapter()
+
+        val adapter = ProductAdapter(Product.Singleton.productList)
         recyclerViewProduct.adapter = adapter
 
         addProductButton.setOnClickListener {
@@ -45,5 +48,11 @@ class HomeFragment : Fragment() {
             )
             Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_addProductFragment, null, null, extras)
         }
+
+        var itemTouchHelper = ItemTouchHelper(SwipeToDelete(adapter))
+        itemTouchHelper.attachToRecyclerView(recyclerViewProduct)
+
+
     }
+
 }
