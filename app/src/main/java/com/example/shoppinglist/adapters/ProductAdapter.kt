@@ -24,7 +24,7 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
         return ProductAdapter.ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = 5
+    override fun getItemCount(): Int = 15
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.text.text = "Pain de mie"

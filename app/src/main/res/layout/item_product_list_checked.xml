@@ -12,7 +12,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:visibility="visible"
-        app:cardBackgroundColor="@color/light_green"
+        app:cardBackgroundColor="@color/light_gray"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/productFrame"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,8 +28,8 @@
             android:layout_gravity="end"
             android:layout_margin="15dp"
             android:contentDescription="@string/todo"
-            app:srcCompat="@drawable/checked"
-            app:tint="@color/white" />
+            app:srcCompat="@drawable/close"
+            app:tint="@color/gray" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -40,7 +40,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
         android:visibility="visible"
-        app:cardBackgroundColor="@color/light_gray"
+        app:cardBackgroundColor="@color/light_green"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,6 +56,7 @@
             android:layout_margin="20dp"
             android:elevation="0dp"
             android:text="Pain de mie"
+            android:textColor="#FFFFFF"
             android:textSize="20sp" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
