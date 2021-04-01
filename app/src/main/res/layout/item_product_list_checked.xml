@@ -6,33 +6,6 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/productFramebackground"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:visibility="visible"
-        app:cardBackgroundColor="@color/light_gray"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/productFrame"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/productFrame"
-        app:layout_constraintVertical_bias="1.0">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="34dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="15dp"
-            android:contentDescription="@string/todo"
-            app:srcCompat="@drawable/close"
-            app:tint="@color/gray" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
         android:id="@+id/productFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
