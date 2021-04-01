@@ -30,30 +30,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressCustom" />
 
-    <FrameLayout
-        android:id="@+id/addProductButton"
+    <include
+        android:id="@+id/include"
+        layout="@layout/button_add_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/bordered_button"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-        <TextView
-            android:id="@+id/buttonAddText"
-            style="@style/NormalText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:elevation="0dp"
-            android:text="Ajouter un produit"
-            android:textSize="20dp"
-            android:transitionName="buttonAddText" />
-    </FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProduct"
@@ -65,7 +50,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addProductButton" />
+        app:layout_constraintTop_toBottomOf="@+id/include" />
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

@@ -5,10 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shoppinglist.ProgressCustom
 import com.example.shoppinglist.R
 import com.example.shoppinglist.storage.Product
 
-class ProductAdapter(val products : ArrayList<Product>) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter(val products : ArrayList<Product>, val progressCustom: ProgressCustom) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     private val TYPE_NORMAL = 1
     private val TYPE_DONE = 2
@@ -61,5 +62,16 @@ class ProductAdapter(val products : ArrayList<Product>) : RecyclerView.Adapter<P
             products.add(0, productCopy)
             notifyItemInserted(0)
         }
+        updateProgress()
+    }
+
+    fun updateProgress(){
+        var result = 0
+        products.forEach {
+            if(it.done) result++
+            }
+        val progress: Float = (result.toFloat() / products.size.toFloat()) * 100f
+        progressCustom.progress = progress.toInt()
+
     }
 }
