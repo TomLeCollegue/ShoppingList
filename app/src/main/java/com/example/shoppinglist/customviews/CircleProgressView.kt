@@ -1,3 +1,5 @@
+package com.example.shoppinglist.customviews
+
 import android.animation.ArgbEvaluator
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator

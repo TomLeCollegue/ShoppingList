@@ -1,5 +1,5 @@
+package com.example.shoppinglist.customviews
 
-package com.example.shoppinglist
 import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.Resources
@@ -7,34 +7,33 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import android.graphics.Typeface
-import android.view.accessibility.AccessibilityNodeInfo
+import android.util.Log
 import android.view.animation.DecelerateInterpolator
-import androidx.core.content.withStyledAttributes
-import androidx.core.view.AccessibilityDelegateCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import com.example.shoppinglist.R
+import kotlin.math.log
 // import android.view.accessibility.AccessibilityNodeInfo
-import kotlin.math.cos
 import kotlin.math.min
-import kotlin.math.sin
+
 // import androidx.core.view.AccessibilityDelegateCompat
 // import androidx.core.view.ViewCompat
 // import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 
 
 
-class ProgressCustom @JvmOverloads constructor(
+class HorizontalProgressView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
+    private var viewWidth: Float = 0.0f
+    private var viewHeight: Float = 0.0f
+
     private val DP_IN_PX = Resources.getSystem().displayMetrics.density
     private val DEFAULT_PROGRESS_STROKE_WIDTH = 16 * DP_IN_PX
 
-    private lateinit var progressBounds: RectF
-    private var sweepAngle: Float = 250f
+    private var widthBar: Float = 0.0f
+    private var maxWidthBar = 0.0f
     private var centerX : Float = 0f
     private var centerY : Float = 0f
 
@@ -43,7 +42,6 @@ class ProgressCustom @JvmOverloads constructor(
     private val progressPaint: Paint
     private val progressTextPaint: Paint
     private val backgroundProgressPaint: Paint
-    private val progressStrokeWidth: Float = DEFAULT_PROGRESS_STROKE_WIDTH
 
     private val animationInterpolator by lazy { DecelerateInterpolator() }
 
@@ -53,29 +51,16 @@ class ProgressCustom @JvmOverloads constructor(
     var progress: Int = 0
         set(value) {
             field = value
-            ValueAnimator.ofFloat(sweepAngle, 360f / 100f * progress).apply {
+            ValueAnimator.ofFloat(widthBar, maxWidthBar / 100f * progress).apply {
                 interpolator = animationInterpolator
                 duration = 300
                 addUpdateListener { animation ->
-                    sweepAngle = animation.animatedValue as Float
+                    widthBar = animation.animatedValue as Float
                     invalidate()
                 }
                 start()
             }
         }
-
-
-    private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        // Paint styles used for rendering are initialized here. This
-        // is a performance optimization, since onDraw() is called
-        // for every screen refresh.
-        style = Paint.Style.FILL
-        textAlign = Paint.Align.CENTER
-        textSize = 55.0f
-        typeface = Typeface.create("", Typeface.BOLD)
-    }
-
-    private var radius = 0.0f                  // Radius of the circle.
 
     init {
         isClickable = true
@@ -108,8 +93,7 @@ class ProgressCustom @JvmOverloads constructor(
             typeface = Typeface.create("cabin", Typeface.BOLD)
             textSize = 120f
         }
-
-        progress = 30
+        progress = 50
     }
 
     /**
@@ -123,17 +107,16 @@ class ProgressCustom @JvmOverloads constructor(
      * @param oldHeight Old height of this view.
      */
     override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
-        // Calculate the radius from the smaller of the width and height.
-        radius = (min(width, height) / 2.0 * 0.7).toFloat()
-        val viewWidth = layoutParams.width.toFloat()
-        val viewHeight = layoutParams.height.toFloat()
-
-        val arcStart = progressStrokeWidth +50
-        val arcEnd = viewWidth - arcStart
-        progressBounds = RectF(arcStart, arcStart, arcEnd, arcEnd)
+        viewWidth = layoutParams.width.toFloat()
+        viewHeight = layoutParams.height.toFloat()
 
         centerX = viewWidth/ 2f
         centerY = viewHeight / 2f
+
+        maxWidthBar = viewWidth - (2*DEFAULT_PROGRESS_STROKE_WIDTH)
+
+        // Update init value progressBar
+        progress = progress
     }
 
     /**
@@ -145,14 +128,23 @@ class ProgressCustom @JvmOverloads constructor(
      */
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        //canvas.drawCircle((width / 2).toFloat(), (height / 2).toFloat(), radius, paint)
 
-        canvas.drawArc(progressBounds, 90f, 360f, false, backgroundProgressPaint)
+        val startX = centerX - (viewWidth/2) + DEFAULT_PROGRESS_STROKE_WIDTH
+        val startY = centerY
+        val stopY = centerY
 
-        canvas.drawArc(progressBounds, 90f, sweepAngle, false, progressPaint)
+        // background
+        val stopX = centerX + (viewWidth/2) - DEFAULT_PROGRESS_STROKE_WIDTH
+        canvas.drawLine(startX,startY, stopX, stopY, backgroundProgressPaint )
 
-        canvas.drawText("$progress%", centerX, centerY + 35f, progressTextPaint)
+        // progressBar
+        var stopXProgress = widthBar + DEFAULT_PROGRESS_STROKE_WIDTH
+        print(stopXProgress)
+
+        if(progress != 0){
+            canvas.drawLine(startX,startY, stopXProgress, stopY, progressPaint )
+        }
 
 
 
-}}
+    }}

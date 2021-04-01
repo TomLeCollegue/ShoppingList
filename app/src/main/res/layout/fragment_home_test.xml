@@ -7,7 +7,19 @@
     app:layoutDescription="@xml/fragment_home_test_scene"
     tools:context=".HomeFragment">
 
-    <com.example.shoppinglist.ProgressCustom
+    <com.example.shoppinglist.customviews.HorizontalProgressView
+        android:id="@+id/horizontalProgressView2"
+        android:layout_width="360dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        app:colorBackground="@color/light_gray"
+        app:colorProgress="@color/light_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressCustom" />
+
+    <com.example.shoppinglist.customviews.ProgressCustom
         android:id="@+id/progressCustom"
         android:layout_width="250dp"
         android:layout_height="250dp"
@@ -25,10 +37,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:text="LISTE DE COURSE"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressCustom" />
+        app:layout_constraintTop_toBottomOf="@+id/horizontalProgressView2" />
 
     <include
         android:id="@+id/include"

@@ -18,6 +18,7 @@ class Product(
                 Product("Bière"),
                 Product("Chips"),
                 Product("Poisson")
+
         )
     }
 }

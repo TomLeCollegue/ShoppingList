@@ -1,23 +1,18 @@
 package com.example.shoppinglist
 
-import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isVisible
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppinglist.adapters.ProductAdapter
+import com.example.shoppinglist.customviews.HorizontalProgressView
+import com.example.shoppinglist.customviews.ProgressCustom
 import com.example.shoppinglist.storage.Product
 
 class HomeFragment : Fragment() {
@@ -34,13 +29,15 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val progressCustom = view.findViewById<ProgressCustom>(R.id.progressCustom)
+        val horizontalProgressView = view.findViewById<HorizontalProgressView>(R.id.horizontalProgressView2)
+
         val addButtonText = view.findViewById<ConstraintLayout>(R.id.addProductButton)
         val addEditText = view.findViewById<EditText>(R.id.editTextAdd)
         val addButton = view.findViewById<FrameLayout>(R.id.buttonAddProduct)
 
         val recyclerViewProduct = view.findViewById<RecyclerView>(R.id.recyclerViewProduct)
 
-        val adapter = ProductAdapter(Product.Singleton.productList, progressCustom)
+        val adapter = ProductAdapter(Product.Singleton.productList, progressCustom, horizontalProgressView)
         recyclerViewProduct.adapter = adapter
 
         adapter.updateProgress()

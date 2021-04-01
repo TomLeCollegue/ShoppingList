@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-    <com.example.shoppinglist.ProgressCustom
+    <com.example.shoppinglist.customviews.ProgressCustom
         android:id="@+id/progressCustom"
         android:layout_width="250dp"
         android:layout_height="250dp"

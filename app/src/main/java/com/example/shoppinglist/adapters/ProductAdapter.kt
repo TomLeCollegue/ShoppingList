@@ -5,11 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.shoppinglist.ProgressCustom
+import com.example.shoppinglist.customviews.ProgressCustom
 import com.example.shoppinglist.R
+import com.example.shoppinglist.customviews.HorizontalProgressView
 import com.example.shoppinglist.storage.Product
 
-class ProductAdapter(val products : ArrayList<Product>, val progressCustom: ProgressCustom) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter(val products : ArrayList<Product>, val progressCustom: ProgressCustom, val horizontalProgressView: HorizontalProgressView) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     private val TYPE_NORMAL = 1
     private val TYPE_DONE = 2
@@ -72,6 +73,7 @@ class ProductAdapter(val products : ArrayList<Product>, val progressCustom: Prog
             }
         val progress: Float = (result.toFloat() / products.size.toFloat()) * 100f
         progressCustom.progress = progress.toInt()
+        horizontalProgressView.progress = progress.toInt()
 
     }
 }
