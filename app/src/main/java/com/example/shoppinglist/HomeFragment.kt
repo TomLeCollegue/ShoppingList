@@ -31,7 +31,6 @@ class HomeFragment : Fragment() {
         val progressCustom = view.findViewById<ProgressCustom>(R.id.progressCustom)
         val horizontalProgressView = view.findViewById<HorizontalProgressView>(R.id.horizontalProgressView2)
 
-        val addButtonText = view.findViewById<ConstraintLayout>(R.id.addProductButton)
         val addEditText = view.findViewById<EditText>(R.id.editTextAdd)
         val addButton = view.findViewById<FrameLayout>(R.id.buttonAddProduct)
 
@@ -47,16 +46,16 @@ class HomeFragment : Fragment() {
         var itemTouchHelper = ItemTouchHelper(SwipeToDelete(adapter))
         itemTouchHelper.attachToRecyclerView(recyclerViewProduct)
 
-
-        addButtonText.setOnClickListener {
-            if(addEditText.visibility == View.GONE){
-                addEditText.visibility = View.VISIBLE
-                addButton.visibility = View.VISIBLE
-            }
-            else{
-                addEditText.visibility = View.GONE
-                addButton.visibility = View.GONE
+        addButton.setOnClickListener {
+            val text = addEditText.text.toString()
+            if(text != ""){
+                Product.Singleton.productList.add(0,Product(addEditText.text.toString()))
+                adapter.notifyItemInserted(0)
+                addEditText.setText("")
+                recyclerViewProduct.smoothScrollToPosition(0)
+                adapter.updateProgress()
             }
         }
+
     }
 }

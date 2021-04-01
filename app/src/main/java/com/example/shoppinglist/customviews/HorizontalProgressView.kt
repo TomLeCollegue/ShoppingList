@@ -107,8 +107,8 @@ class HorizontalProgressView @JvmOverloads constructor(
      * @param oldHeight Old height of this view.
      */
     override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
-        viewWidth = layoutParams.width.toFloat()
-        viewHeight = layoutParams.height.toFloat()
+        viewWidth = width.toFloat()
+        viewHeight = height.toFloat()
 
         centerX = viewWidth/ 2f
         centerY = viewHeight / 2f

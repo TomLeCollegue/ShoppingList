@@ -20,10 +20,9 @@
         <Constraint
             android:id="@+id/horizontalProgressView2"
             motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="360dp"
+            android:layout_width="330dp"
             android:layout_height="20dp"
             motion:layout_constraintTop_toBottomOf="@+id/progressCustom"
-            motion:layout_constraintHorizontal_bias="0.491"
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="8dp"
             android:visibility="gone" />
@@ -43,12 +42,13 @@
         <Constraint
             android:id="@+id/horizontalProgressView2"
             motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="360dp"
+            android:layout_width="0dp"
             android:layout_height="20dp"
             motion:layout_constraintTop_toBottomOf="@+id/progressCustom"
-            motion:layout_constraintHorizontal_bias="0.491"
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="8dp"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp" />
     </ConstraintSet>
 </MotionScene>
