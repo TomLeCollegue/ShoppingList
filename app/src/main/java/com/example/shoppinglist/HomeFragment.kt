@@ -27,7 +27,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val product = Product("")
         val progressCustom = view.findViewById<ProgressCustom>(R.id.progressCustom)
         val horizontalProgressView = view.findViewById<HorizontalProgressView>(R.id.horizontalProgressView2)
 
@@ -39,6 +39,7 @@ class HomeFragment : Fragment() {
         val adapter = ProductAdapter(Product.Singleton.productList, progressCustom, horizontalProgressView)
         recyclerViewProduct.adapter = adapter
 
+        product.UpdateData(adapter)
         adapter.updateProgress()
 
 
