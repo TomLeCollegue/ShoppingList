@@ -50,7 +50,7 @@ class ProductAdapter(val products : ArrayList<Product>, val progressCustom: Prog
     }
 
     fun toggleItem(position: Int){
-        val bool = products[position].done
+        /*val bool = products[position].done
         val productCopy = products[position].clone(bool)
         products.removeAt(position)
         notifyItemRemoved(position)
@@ -62,8 +62,9 @@ class ProductAdapter(val products : ArrayList<Product>, val progressCustom: Prog
         else{
             products.add(0, productCopy)
             notifyItemInserted(0)
-        }
-        updateProgress()
+        }*/
+        products[position].done = !products[position].done
+        products[position].updateProduct()
     }
 
     fun updateProgress(){

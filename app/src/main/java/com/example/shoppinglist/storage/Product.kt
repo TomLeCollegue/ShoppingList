@@ -1,14 +1,16 @@
 package com.example.shoppinglist.storage
 
 import com.example.shoppinglist.adapters.ProductAdapter
+import com.example.shoppinglist.storage.Product.Singleton.productList
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class Product(
-        val text: String = "",
-        val done: Boolean = false
+    val text: String = "",
+    var done: Boolean = false,
+    val id: String = "product0"
 ) {
 
     fun clone(bool : Boolean): Product {
@@ -30,23 +32,44 @@ class Product(
         )
     }
 
-    fun UpdateData(productAdapter: ProductAdapter){
+    fun updateData(productAdapter: ProductAdapter){
         Singleton.databaseRef.addValueEventListener(object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
 
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                Singleton.productList.clear()
+                productList.clear()
                 for(ds in snapshot.children){
                     val product = ds.getValue(Product::class.java)
                     if(product !=null){
-                        Singleton.productList.add(product)
+                        productList.add(product)
                     }
                 }
+                productList.sortBy { it.done }
                 productAdapter.notifyDataSetChanged()
+                productAdapter.updateProgress()
             }
 
         })
     }
+
+    fun updateProduct(){
+        Singleton.databaseRef.child(id).setValue(this)
+    }
+
+    fun addProduct(){
+        Singleton.databaseRef.child(id).setValue(this)
+    }
+
+
+    fun isAlreadyExisting() : Int{
+        productList.forEachIndexed { index, product ->
+            if(product.id == id){
+                return index
+            }
+        }
+        return -1
+    }
+
 }

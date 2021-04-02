@@ -14,6 +14,7 @@ import com.example.shoppinglist.adapters.ProductAdapter
 import com.example.shoppinglist.customviews.HorizontalProgressView
 import com.example.shoppinglist.customviews.ProgressCustom
 import com.example.shoppinglist.storage.Product
+import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -39,7 +40,7 @@ class HomeFragment : Fragment() {
         val adapter = ProductAdapter(Product.Singleton.productList, progressCustom, horizontalProgressView)
         recyclerViewProduct.adapter = adapter
 
-        product.UpdateData(adapter)
+        product.updateData(adapter)
         adapter.updateProgress()
 
 
@@ -50,10 +51,10 @@ class HomeFragment : Fragment() {
         addButton.setOnClickListener {
             val text = addEditText.text.toString()
             if(text != ""){
-                Product.Singleton.productList.add(0,Product(addEditText.text.toString()))
-                adapter.notifyItemInserted(0)
+                val product = Product(addEditText.text.toString(), false, UUID.randomUUID().toString())
+                product.addProduct()
                 addEditText.setText("")
-                recyclerViewProduct.smoothScrollToPosition(0)
+                //recyclerViewProduct.smoothScrollToPosition(0)
                 adapter.updateProgress()
             }
         }
