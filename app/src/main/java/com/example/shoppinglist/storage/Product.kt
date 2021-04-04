@@ -22,16 +22,8 @@ class Product(
 
     object Singleton {
 
-        val databaseRef = FirebaseDatabase.getInstance().getReference("products")
-        val productList = arrayListOf<Product>(
-         /*       Product("pain de mie"),
-                Product("Pains aux chocolat"),
-                Product("Saucisson"),
-                Product("Bière"),
-                Product("Chips"),
-                Product("Poisson")
-*/
-        )
+        val databaseRef = FirebaseDatabase.getInstance().getReference("productsHolyTom")
+        val productList = arrayListOf<Product>()
     }
 
     fun updateData(productAdapter: ProductAdapter){
@@ -68,6 +60,7 @@ class Product(
                 }
             }
         }
+        productAdapter.updateProgress()
     }
 
 
@@ -108,14 +101,28 @@ class Product(
             if(productList[index].done != product.done){
                 Log.d("debugUpdate",index.toString())
                 if(product.done){
-                    productList.removeAt(index)
-                    productList.add(product)
-                    productAdapter.notifyItemMoved(index, productList.size-1)
+
+                        productList.removeAt(index)
+                        productList.add(product)
+                        if(index ==  productList.size-1){
+                            productAdapter.notifyItemChanged(index)
+                        }
+                        else{
+                        productAdapter.notifyItemMoved(index, productList.size-1)
+                        }
+
                 }
                 else{
-                    productList.removeAt(index)
-                    productList.add(0,product)
-                    productAdapter.notifyItemMoved(index,0)
+
+                        productList.removeAt(index)
+                        productList.add(0, product)
+                        if(index == 0){
+                            productAdapter.notifyItemChanged(0)
+                        }
+                        else{
+                            productAdapter.notifyItemMoved(index, 0)
+                        }
+
                 }
             }
         }
