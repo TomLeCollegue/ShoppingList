@@ -67,4 +67,8 @@ class ProductAdapter(val products : ArrayList<Product>, val progressCustom: Prog
         horizontalProgressView.progress = progress.toInt()
 
     }
+
+    fun removeItem(pos: Int) {
+        products[pos].removeItem()
+    }
 }

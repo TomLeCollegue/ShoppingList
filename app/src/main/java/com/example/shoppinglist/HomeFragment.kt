@@ -46,7 +46,9 @@ class HomeFragment : Fragment() {
 
 
         var itemTouchHelper = ItemTouchHelper(SwipeToDelete(adapter))
+        var itemTouchHelperRight = ItemTouchHelper(SwipeRight(adapter))
         itemTouchHelper.attachToRecyclerView(recyclerViewProduct)
+        itemTouchHelperRight.attachToRecyclerView(recyclerViewProduct)
 
         addButton.setOnClickListener {
             val text = addEditText.text.toString()

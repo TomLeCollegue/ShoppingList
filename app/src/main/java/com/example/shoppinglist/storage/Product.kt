@@ -2,6 +2,7 @@ package com.example.shoppinglist.storage
 
 import android.util.Log
 import com.example.shoppinglist.adapters.ProductAdapter
+import com.example.shoppinglist.storage.Product.Singleton.databaseRef
 import com.example.shoppinglist.storage.Product.Singleton.productList
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -40,18 +41,25 @@ class Product(
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
+                val products = arrayListOf<Product>()
+                products.clear()
                 for(ds in snapshot.children){
                     val product = ds.getValue(Product::class.java)
                     if(product !=null){
                         updateRecyclerViewProduct(productAdapter,product)
-                        //productList.sortBy { it.done }
+                        products.add(product)
                     }
                 }
 
-
+                Log.d("debugString", products.toString())
+                removeItemListIfNotInDatabase(products)
             }
 
         })
+    }
+
+    private fun removeItemListIfNotInDatabase(products: ArrayList<Product>) {
+
     }
 
     fun updateProduct(){
@@ -104,5 +112,14 @@ class Product(
         productAdapter.updateProgress()
 
     }
+
+    fun removeItem() {
+        databaseRef.child(id).removeValue()
+    }
+
+    override fun toString(): String {
+        return "Product(text='$text', done=$done)"
+    }
+
 
 }
