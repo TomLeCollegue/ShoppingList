@@ -52,15 +52,25 @@ class Product(
                 }
 
                 Log.d("debugString", products.toString())
-                removeItemListIfNotInDatabase(products)
+                removeItemListIfNotInDatabase(snapshot, productAdapter)
             }
 
         })
     }
 
-    private fun removeItemListIfNotInDatabase(products: ArrayList<Product>) {
-
+    private fun removeItemListIfNotInDatabase(snapshot: DataSnapshot, productAdapter: ProductAdapter) {
+        for(i in 0 until productList.size){
+            if(i < productList.size){
+                if(!snapshot.hasChild(productList[i].id)){
+                    Log.d("debugString", "on enleve le produit $i")
+                    productList.removeAt(i)
+                    productAdapter.notifyItemRemoved(i)
+                }
+            }
+        }
     }
+
+
 
     fun updateProduct(){
         Singleton.databaseRef.child(id).setValue(this)
